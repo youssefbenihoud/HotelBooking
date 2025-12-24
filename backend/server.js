@@ -4,6 +4,8 @@ import "dotenv/config";
 import connectDB from "./config/mongodb.js";
 import connectCloudinary from "./config/cloudinary.js";
 import { roomRouter } from "./routes/roomRoute.js";
+import userRouter from "./routes/userRoute.js";
+import reservationRouter from "./routes/reservationRoute.js";
 
 const app = express();
 
@@ -15,6 +17,8 @@ connectCloudinary();
 app.use(cors());
 app.use(express.json());
 app.use("/api/room", roomRouter);
+app.use("/api/user", userRouter);
+app.use("/api/reservation", reservationRouter);
 
 app.get("/", (req, res) => {
   res.send("API Working");
