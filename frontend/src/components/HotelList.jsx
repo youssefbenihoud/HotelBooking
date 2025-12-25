@@ -28,7 +28,7 @@ const HotelList = () => {
   console.log("rooms --> ", rooms);
 
   return (
-    <div className="bg-white py-16 px-4">
+    <div id="hotel-list" className="bg-white py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-serif text-center mb-12 text-gray-800">
           Book your stay and <br /> relax in Luxury

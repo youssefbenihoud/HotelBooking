@@ -10,7 +10,7 @@ const Bookings = () => {
   const fetchBookings = async () => {
     if (!token) return;
     try {
-      const response = await axios.get(`${url}/api/reservation/list`, { headers: { token } });
+      const response = await axios.post(`${url}/api/reservation/list`, {}, { headers: { token } });
       if (response.data.success) {
         setBookings(response.data.data);
       } else {
@@ -32,7 +32,7 @@ const Bookings = () => {
         <table className="min-w-full bg-white">
           <thead>
             <tr>
-              <th className="py-2 px-4 border-b">Room</th>
+              <th className="py-2 px-4 border-b">Room Details</th>
               <th className="py-2 px-4 border-b">Check-in</th>
               <th className="py-2 px-4 border-b">Check-out</th>
               <th className="py-2 px-4 border-b">Guests</th>
@@ -41,7 +41,12 @@ const Bookings = () => {
           <tbody>
             {bookings.map((booking) => (
               <tr key={booking._id}>
-                <td className="py-2 px-4 border-b">{booking.room?.name}</td>
+                <td className="py-2 px-4 border-b">
+                  <div className="flex items-center space-x-3">
+                    <img src={booking.room?.image} alt={booking.room?.name} className="w-16 h-16 object-cover rounded-md" />
+                    <span>{booking.room?.name}</span>
+                  </div>
+                </td>
                 <td className="py-2 px-4 border-b">{new Date(booking.checkIn).toLocaleDateString()}</td>
                 <td className="py-2 px-4 border-b">{new Date(booking.checkOut).toLocaleDateString()}</td>
                 <td className="py-2 px-4 border-b">{booking.guests}</td>
