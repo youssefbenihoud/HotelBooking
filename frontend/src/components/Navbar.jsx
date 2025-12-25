@@ -39,9 +39,11 @@ const Navbar = () => {
             <li onClick={handleRoomsClick} className="font-bold text-lg cursor-pointer hover:text-lime-400">
               Rooms
             </li>
-            <li className="font-bold text-lg cursor-pointer hover:text-lime-400">
-              Contact
-            </li>
+            <Link to="/contact">
+                <li className="font-bold text-lg cursor-pointer hover:text-lime-400">
+                Contact
+                </li>
+            </Link>
             {token ? (
               <li onClick={logout} className="font-bold text-lg cursor-pointer hover:text-lime-400">
                 Logout
