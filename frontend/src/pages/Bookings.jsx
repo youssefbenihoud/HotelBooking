@@ -27,8 +27,25 @@ const Bookings = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-4">My Bookings</h2>
-      <div className="overflow-x-auto">
+      <h2 className="text-2xl font-bold mb-4 text-center">My Bookings</h2>
+
+      {/* Mobile View - Card Layout */}
+      <div className="md:hidden space-y-4">
+        {bookings.map((booking) => (
+          <div key={booking._id} className="bg-white p-4 rounded-lg shadow-md">
+            <img src={booking.room?.image} alt={booking.room?.name} className="w-full h-48 object-cover rounded-md mb-4" />
+            <h3 className="text-xl font-semibold mb-2">{booking.room?.name}</h3>
+            <div className="text-sm text-gray-600">
+              <p><span className="font-semibold">Check-in:</span> {new Date(booking.checkIn).toLocaleDateString()}</p>
+              <p><span className="font-semibold">Check-out:</span> {new Date(booking.checkOut).toLocaleDateString()}</p>
+              <p><span className="font-semibold">Guests:</span> {booking.guests}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop View - Table Layout */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full bg-white">
           <thead>
             <tr>
