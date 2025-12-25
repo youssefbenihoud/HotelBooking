@@ -11,7 +11,8 @@ get {
 }
 
 headers {
-  token: {{userToken}}
+  token: {{adminToken}}
+  ~token: {{userToken}}
 }
 
 body:json {

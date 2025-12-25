@@ -7,13 +7,14 @@ import {
   updateRoom,
 } from "../controllers/roomControllers.js";
 import upload from "../middleware/multer.js";
+import adminAuth from "../middleware/adminAuth.js";
 
 const roomRouter = express.Router();
 
-roomRouter.post("/add", upload.single("image"), addRoom);
-roomRouter.get("/list", listRoom);
-roomRouter.get("/:id", singleRoom);
-roomRouter.post("/remove", removeRoom);
-roomRouter.post("/update", upload.single("image"), updateRoom);
+roomRouter.post("/add", adminAuth, upload.single("image"), addRoom);
+roomRouter.get("/list", adminAuth, listRoom);
+roomRouter.get("/:id", adminAuth, singleRoom);
+roomRouter.post("/remove", adminAuth, removeRoom);
+roomRouter.post("/update", adminAuth, upload.single("image"), updateRoom);
 
 export { roomRouter };

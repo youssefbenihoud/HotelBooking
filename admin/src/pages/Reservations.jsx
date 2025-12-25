@@ -5,10 +5,12 @@ import { toast } from 'react-toastify';
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
   const url = "http://localhost:4000";
+  const token = localStorage.getItem('token');
+  const headers = { token };
 
   const fetchReservations = async () => {
     try {
-      const response = await axios.get(`${url}/api/reservation/list-all`);
+      const response = await axios.get(`${url}/api/reservation/list-all`, { headers });
       if (response.data.success) {
         setReservations(response.data.data);
       } else {
@@ -22,7 +24,7 @@ const Reservations = () => {
   const handleRemoveReservation = async (reservationId) => {
     if (window.confirm("Are you sure you want to remove this reservation?")) {
       try {
-        const response = await axios.post(`${url}/api/reservation/remove`, { id: reservationId });
+        const response = await axios.post(`${url}/api/reservation/remove`, { id: reservationId }, { headers });
         if (response.data.success) {
           toast.success("Reservation removed successfully");
           fetchReservations();
@@ -36,8 +38,10 @@ const Reservations = () => {
   };
 
   useEffect(() => {
-    fetchReservations();
-  }, []);
+    if(token) {
+        fetchReservations();
+    }
+  }, [token]);
 
   return (
     <div>

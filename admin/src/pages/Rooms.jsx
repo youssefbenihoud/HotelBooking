@@ -7,10 +7,12 @@ const Rooms = () => {
   const [newRoom, setNewRoom] = useState({ name: '', description: '', price: '', image: null });
   const [editingRoom, setEditingRoom] = useState(null);
   const url = "http://localhost:4000";
+  const token = localStorage.getItem('token');
+  const headers = { token };
 
   const fetchRooms = async () => {
     try {
-      const response = await axios.get(`${url}/api/room/list`);
+      const response = await axios.get(`${url}/api/room/list`, { headers });
       if (response.data.success) {
         setRooms(response.data.data);
       } else {
@@ -30,7 +32,7 @@ const Rooms = () => {
     formData.append('image', newRoom.image);
 
     try {
-      const response = await axios.post(`${url}/api/room/add`, formData);
+      const response = await axios.post(`${url}/api/room/add`, formData, { headers });
       if (response.data.success) {
         toast.success("Room added successfully");
         setNewRoom({ name: '', description: '', price: '', image: null });
@@ -46,7 +48,7 @@ const Rooms = () => {
   const handleRemoveRoom = async (roomId) => {
     if (window.confirm("Are you sure you want to remove this room?")) {
       try {
-        const response = await axios.post(`${url}/api/room/remove`, { id: roomId });
+        const response = await axios.post(`${url}/api/room/remove`, { id: roomId }, { headers });
         if (response.data.success) {
           toast.success("Room removed successfully");
           fetchRooms();
@@ -71,7 +73,7 @@ const Rooms = () => {
     }
   
     try {
-      const response = await axios.post(`${url}/api/room/update`, formData);
+      const response = await axios.post(`${url}/api/room/update`, formData, { headers });
       if (response.data.success) {
         toast.success("Room updated successfully");
         setEditingRoom(null);
@@ -85,8 +87,10 @@ const Rooms = () => {
   };
 
   useEffect(() => {
-    fetchRooms();
-  }, []);
+    if(token) {
+        fetchRooms();
+    }
+  }, [token]);
 
   return (
     <div>
