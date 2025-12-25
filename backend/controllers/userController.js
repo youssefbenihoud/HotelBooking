@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
 
-const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET);
+const createToken = (id, secret) => {
+  return jwt.sign({ id }, secret);
 };
 
 const loginUser = async (req, res) => {
@@ -18,7 +18,7 @@ const loginUser = async (req, res) => {
         if (!isMatch) {
             return res.json({success: false, message: "Invalid credentials"});
         }
-        const token = createToken(user._id);
+        const token = createToken(user._id, process.env.JWT_SECRET);
         res.json({success: true, token});
     } catch (error) {
         console.log(error);
@@ -48,7 +48,7 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
     });
     const user = await newUser.save();
-    const token = createToken(user._id);
+    const token = createToken(user._id, process.env.JWT_SECRET);
     res.json({ success: true, token });
   } catch (error) {
     console.log(error);
@@ -56,4 +56,24 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { loginUser, registerUser };
+const getUsers = async (req, res) => {
+    try {
+        const users = await userModel.find({});
+        res.json({success: true, data: users});
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: "Error"});
+    }
+}
+
+const removeUser = async (req, res) => {
+    try {
+        await userModel.findByIdAndDelete(req.body.id);
+        res.json({success: true, message: "User removed"});
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: "Error"});
+    }
+}
+
+export { loginUser, registerUser, getUsers, removeUser };
