@@ -2,6 +2,10 @@ import React from "react";
 import bgImage from "../assets/hero2.jpg";
 
 const Hero = () => {
+  const handleScrollToRooms = () => {
+    document.getElementById("hotel-list").scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div
       className="relative h-[100vh] w-full bg-cover bg-center bg-no-repeat "
@@ -13,7 +17,10 @@ const Hero = () => {
           Where Luxury meets Dinner!
         </h2>
         <h1 className="text-4xl font-bold mb-6">Marokko HOTELS</h1>
-        <button className="bg-lime-500 text-black font-bold py-3 px-6 rounded-lg hover:bg-lime-600 transition uppercase">
+        <button
+          onClick={handleScrollToRooms}
+          className="bg-lime-500 text-black font-bold py-3 px-6 rounded-lg hover:bg-lime-600 transition uppercase"
+        >
           Book your stay
         </button>
       </div>
