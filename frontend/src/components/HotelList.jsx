@@ -33,7 +33,7 @@ const HotelList = () => {
         <h2 className="text-4xl font-serif text-center mb-12 text-gray-800">
           Book your stay and <br /> relax in Luxury
         </h2>
-        <div className="grid grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {rooms && rooms.length > 0 ? (
             rooms.map((room, index) => {
               const { _id, image, name, price } = room;

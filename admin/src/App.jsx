@@ -13,6 +13,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return !!localStorage.getItem('token');
   });
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -25,9 +26,9 @@ const App = () => {
       <ToastContainer />
       {isLoggedIn ? (
         <>
-          <Navbar logout={logout} />
+          <Navbar logout={logout} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
           <div className="flex">
-            <Sidebar />
+            <Sidebar isOpen={isSidebarOpen} />
             <div className="flex-1 p-8">
               <Routes>
                 <Route path="/rooms" element={<Rooms />} />

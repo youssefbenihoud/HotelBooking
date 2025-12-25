@@ -121,11 +121,11 @@ const Rooms = () => {
       </div>
 
       {editingRoom && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-8 rounded-lg">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <div className="bg-white p-8 rounded-lg w-full max-w-md">
             <h2 className="text-2xl font-bold mb-4">Update Room</h2>
             <form onSubmit={handleUpdateRoom}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+              <div className="grid grid-cols-1 gap-6 mb-4">
                 <input type="text" placeholder="Name" value={editingRoom.name} onChange={(e) => setEditingRoom({ ...editingRoom, name: e.target.value })} className="w-full p-2 border rounded" required/>
                 <input type="number" placeholder="Price" value={editingRoom.price} onChange={(e) => setEditingRoom({ ...editingRoom, price: e.target.value })} className="w-full p-2 border rounded" required/>
               </div>

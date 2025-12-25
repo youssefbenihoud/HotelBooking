@@ -33,7 +33,7 @@ const Messages = () => {
             <div className="space-y-4">
                 {messages.map((message) => (
                     <div key={message._id} className="bg-white p-4 rounded-lg shadow-md">
-                        <div className="flex justify-between items-center mb-2">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
                             <h3 className="text-lg font-semibold">{message.name}</h3>
                             <p className="text-sm text-gray-500">{message.email}</p>
                         </div>

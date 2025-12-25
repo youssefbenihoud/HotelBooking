@@ -75,7 +75,7 @@ const HotelDetails = () => {
             >
               <h3 className="text-2xl font-bold mb-6">Book Your Stay</h3>
               <div className="grid grid-cols-1 gap-6">
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <input
                     type="date"
                     value={bookingData.checkIn}

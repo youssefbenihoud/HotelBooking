@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen }) => {
   return (
-    <div className="w-64 h-screen bg-gray-200 p-4">
+    <div className={`w-64 h-screen bg-gray-200 p-4 transition-all duration-300 ${isOpen ? 'block' : 'hidden'} md:block`}>
       <ul>
         <li>
           <NavLink to="/rooms" className="text-lg font-semibold" activeClassName="text-blue-500">
