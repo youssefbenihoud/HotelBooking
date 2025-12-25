@@ -7,6 +7,7 @@ import { roomRouter } from "./routes/roomRoute.js";
 import userRouter from "./routes/userRoute.js";
 import reservationRouter from "./routes/reservationRoute.js";
 import adminRouter from "./routes/adminRoute.js";
+import messageRouter from "./routes/messageRoute.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/room", roomRouter);
 app.use("/api/user", userRouter);
 app.use("/api/reservation", reservationRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/message", messageRouter);
 
 app.get("/", (req, res) => {
   res.send("API Working");

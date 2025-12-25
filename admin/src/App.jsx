@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Rooms from './pages/Rooms';
 import Reservations from './pages/Reservations';
+import Messages from './pages/Messages';
 import LoginPage from './pages/LoginPage';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,6 +32,7 @@ const App = () => {
               <Routes>
                 <Route path="/rooms" element={<Rooms />} />
                 <Route path="/reservations" element={<Reservations />} />
+                <Route path="/messages" element={<Messages />} />
                 <Route path="*" element={<Navigate to="/rooms" />} />
               </Routes>
             </div>

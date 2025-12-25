@@ -15,6 +15,11 @@ const Sidebar = () => {
             Reservations
           </NavLink>
         </li>
+        <li>
+            <NavLink to="/messages" className="text-lg font-semibold" activeClassName="text-blue-500">
+                Messages
+            </NavLink>
+        </li>
       </ul>
     </div>
   );

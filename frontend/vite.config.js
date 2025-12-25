@@ -6,4 +6,5 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [tailwindcss(), react()],
   server: { port: 5173 },
+  cacheDir: "node_modules/.vite",
 });

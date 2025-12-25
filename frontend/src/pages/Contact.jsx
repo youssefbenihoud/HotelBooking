@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Contact = () => {
-  const handleSubmit = (e) => {
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const url = import.meta.env.VITE_BACKEND_URL;
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.id]: e.target.value });
+    };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    alert("Thank you for your message!");
+    try {
+        const response = await axios.post(`${url}/api/message/create`, formData);
+        if (response.data.success) {
+            toast.success("Message sent successfully!");
+            setFormData({ name: '', email: '', message: '' });
+        } else {
+            toast.error("Error sending message");
+        }
+    } catch (error) {
+        toast.error("Error sending message");
+    }
   };
 
   return (
@@ -20,6 +38,8 @@ const Contact = () => {
             <input
               type="text"
               id="name"
+              value={formData.name}
+              onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500"
               required
             />
@@ -29,6 +49,8 @@ const Contact = () => {
             <input
               type="email"
               id="email"
+              value={formData.email}
+              onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500"
               required
             />
@@ -38,6 +60,8 @@ const Contact = () => {
             <textarea
               id="message"
               rows="4"
+              value={formData.message}
+              onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500"
               required
             ></textarea>
