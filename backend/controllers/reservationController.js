@@ -16,7 +16,7 @@ const createReservation = async (req, res) => {
 
 const listReservations = async (req, res) => {
     try {
-        const reservations = await reservationModel.find({user: req.body.userId});
+        const reservations = await reservationModel.find({user: req.body.userId}).populate('room');
         res.json({success: true, data: reservations});
     } catch (error) {
         console.log(error);
