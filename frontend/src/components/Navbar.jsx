@@ -11,6 +11,13 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const handleRoomsClick = () => {
+    navigate("/");
+    setTimeout(() => {
+      document.getElementById("hotel-list").scrollIntoView({ behavior: "smooth" });
+    }, 100); 
+  };
+
   return (
     <div>
       <nav className="flex justify-between p-[2rem] bg-black text-white">
@@ -29,7 +36,7 @@ const Navbar = () => {
                 Bookings
                 </li>
             </Link>
-            <li className="font-bold text-lg cursor-pointer hover:text-lime-400">
+            <li onClick={handleRoomsClick} className="font-bold text-lg cursor-pointer hover:text-lime-400">
               Rooms
             </li>
             <li className="font-bold text-lg cursor-pointer hover:text-lime-400">
